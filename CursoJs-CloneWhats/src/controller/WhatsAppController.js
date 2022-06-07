@@ -12,7 +12,6 @@ class WhatsAppController {
         document.querySelectorAll('[id]').forEach(element => {
             this.el[Format.getCamelCase(element.id)] = element;
         });
-
     }
    
     elementsPrototype() {
@@ -137,13 +136,16 @@ class WhatsAppController {
       });
       
        this.el.btnAttachPhoto.on('click', e=> {
-            this.el.inputPhoto.on('change', e=> {
-                [...this.el.inputPhoto.files].forEach(file => {
-                     console.log(file);
-                });
-            });
+        this.el.inputPhoto.click();
       });
-      //
+       
+       this.el.inputPhoto.on('change', e=>{
+                 [...this.el.inputPhoto.files].forEach(file => {
+                    console.log(file);
+               });
+       }); 
+
+
        this.el.btnAttachCamera.on('click', e=> {
          this.closeAllMainPanel();
            this.el.panelCamera.addClass('open'); 
@@ -188,11 +190,13 @@ class WhatsAppController {
        this.el.btnCloseModalContacts.on('click', e=> {
            this.el.modalContacts.hide();
        });
+
       this.el.btnSendMicrophone.on('click',e=>{
           this.el.recordMicrophone.show();
           this.el.btnSendMicrophone.hide();
           this.startRecordMicrophoneTime();
       });
+     
       this.el.btnCancelMicrophone.on('click',e=>{
           this.closeRecordMicrophone();
       });
@@ -280,6 +284,7 @@ class WhatsAppController {
         this.el.panelDocumentPreview.removeClass('open');
         this.el.panelCamera.removeClass('open'); 
     }
+    
     closeMenuAttach(e){
         document.removeEventListener('click', this.closeMenuAttach);
         this.el.menuAttach.removeClass('open');    
